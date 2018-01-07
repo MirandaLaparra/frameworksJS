@@ -1,4 +1,3 @@
-
 var busquedaHorizontal=0;
 var busquedaVertical=0;
 var buscarNuevosDulces=0;
@@ -17,6 +16,14 @@ var score=0;
 var mov=0;
 var min=2;
 var seg=0;
+
+
+$(document).ready(function() {
+   setInterval(function(){
+  $(".main-titulo").switchClass("main-titulo","main-titulo-efecto", 800),
+    $(".main-titulo").switchClass("main-titulo-efecto","main-titulo", 800)
+  }, 1000);
+});
 
 
 $(".btn-reinicio").click(function(){
@@ -64,10 +71,33 @@ function desplazamiento(){
 	},150);}
 };
 
+
+function timer(){
+	if(seg!=0){
+		seg=seg-1;}
+	if(seg==0){
+		if(min==0){
+			clearInterval(eliminar);
+			clearInterval(nuevosDulces);
+			clearInterval(intervalo);
+			clearInterval(tiempo);
+			$(".panel-tablero").hide("drop","slow",funcioncita);
+			$(".time").hide();}
+		seg=59;
+		min=min-1;}
+	$("#timer").html("0"+min+":"+seg);
+};
+
+
 function funcioncita(){
 	$( ".panel-score" ).animate({width:'100%'},3000);
 };
 
+
+function borrartotal(){
+	for(var j=1;j<8;j++){
+		$(".col-"+j).children("img").detach();}
+};
 
 
 function eliminarhorver(){
